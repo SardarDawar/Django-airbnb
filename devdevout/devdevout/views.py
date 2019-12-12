@@ -35,13 +35,13 @@ def  trip_content(request):
     test=User_Data.objects.all()
     for i in range(0,len(test)):
         k=test[i]
-   
+    print(test[0])
     form=trip_contentform()
     if request.method == 'POST':
         form=trip_contentform(request.POST)
         if form.is_valid():
             new=form.save(commit=False)
-            new.initial_data=k
+            new.initial_data=test[0]
             new.save()
             form.save()
             return redirect('triplist')
