@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for i in test %}
+
+<div class="mx-auto mt-5 mb-5" style="width: auto;">
+
+
+    <div class="card-responsive" style=" width: auto;">
+        <div class="shadow p-3 bg-white rounded">
+
+            <div class="card-header text-center bg-transparent border-0">
+                <h3>
+                  <a href="{% url 'trip' i.id %}"> {{i.title}}</a></h3>
+            </div>
+            <div class="card-body">
+      
+               <strong>Destination</strong> :   {{i.Destination}}<br>
+              <strong>Maximum Budget</strong>:  {{i.Max_Budget}}<br>
+                <strong>Number of days</strong>:   {{i.Number_of_days}}<br>
+
+                        
+              
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    
+    {% if form.errors %}
+    {% for field in form %}
+    {% for error in field.errors %}
+    <div class="alert alert-danger">
+            There is error in  {{ field.name }} &nbsp;&nbsp;&nbsp; <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+    {% endfor %}
+    {% endif %}
+    <form method="POST">
+            {% csrf_token %}
+
+        <div class="mx-auto mt-5 mb-5" style="width: auto;">
+
+
+            <div class="card-responsive" style=" width: auto;">
+                <div class="shadow p-3 bg-white rounded">
+
+                    <div class="card-header text-center bg-transparent border-0">
+                        <h3>
+                            Trip Details</h3>
+                    </div>
+
+
+                 
+                    <div class="card-body">
+
+
+
+                        
+                        <div class="form-group">
+                            {{form.media}}
+                            {{form.as_p}}
+                            </div>
+                        <input type="submit" class="btn btn-primary">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+                $(function () {
+                    CKEDITOR.replace('content', {
+                         toolbar: 'None',
+                         filebrowserImageUploadUrl:'uploads/'
+                    });
+                });
+                CKEDITOR.on('dialogDefinition', function (ev) {
+
+var dialogName = ev.data.name,
+    dialogDefinition = ev.data.definition;
+
+if (dialogName == 'image') {
+    var onOk = dialogDefinition.onOk;
+
+    dialogDefinition.onOk = function (e) {
+        var width = this.getContentElement('info', 'txtWidth');
+        width.setValue('300');//Set Default Width
+
+        var height = this.getContentElement('info', 'txtHeight');
+        height.setValue('300');////Set Default height
+
+        onOk && onOk.apply(this, e);
+    };
+}
+});
+
+            </script>
+    </form>
+
+    {% endblock %}
